@@ -17,7 +17,7 @@ class Student(Person):
         print("I am a student")
 
 
-class Teacher(IPerson):
+class Teacher(Person):
 
     def __init__(self):
         self.name = "Basic Teacher Name"
