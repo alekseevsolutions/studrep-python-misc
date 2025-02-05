@@ -1,14 +1,14 @@
-from abc import ABCMeta, abstractstaticmethod
+from abc import ABC, abstractmethod
 
 
-class IPerson(metaclass=ABCMeta):
+class Person(ABC):
 
-    @abstractstaticmethod
-    def person_method():
-        """ Interface Method """
+    @abstractmethod
+    def person_method(self):
+        pass
 
 
-class Student(IPerson):
+class Student(Person):
 
     def __init__(self):
         self.name = "Basic Student Name"
