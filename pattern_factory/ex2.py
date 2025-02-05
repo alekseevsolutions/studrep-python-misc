@@ -1,173 +1,128 @@
-from abc import ABC, abstractmethod
+class HeroFactory:
 
-class HeroFactory(ABC):
+    @classmethod
+    def create_hero(cls, name):
+        return cls.Hero(name)
 
-    @abstractmethod
-    def create_hero(self, name):
-        pass
+    @classmethod
+    def create_spell(cls):
+        return cls.Spell()
 
-    @abstractmethod
-    def create_spell(self):
-        pass
-
-    @abstractmethod
-    def create_weapon(self):
-        pass
+    @classmethod
+    def create_weapon(cls):
+        return cls.Weapon()
 
 
 class WarriorFactory(HeroFactory):
+    class Hero:
+        def __init__(self, name):
+            self.name = name
+            self.weapon = None
+            self.armor = None
+            self.spell = None
 
-    def create_hero(self, name):
-        return Warrior(name)
+        def add_weapon(self, weapon):
+            self.weapon = weapon
 
-    def create_spell(self):
-        return Power()
+        def add_spell(self, spell):
+            self.spell = spell
 
-    def create_weapon(self):
-        return Claymore()
+        def hit(self):
+            print(f"Warrior hits with {self.weapon.hit()}")
+            self.weapon.hit()
 
+        def cast(self):
+            print(f"Warrior casts {self.spell.cast()}")
+            self.spell.cast()
 
-class Warrior:
-    def __init__(self, name):
-        self.name = name
-        self.spell = None
-        self.weapon = None
+    class Weapon:
+        def hit(self):
+            return "Claymore"
 
-    def add_weapon(self, weapon):
-        self.weapon = weapon
-
-    def add_spell(self, spell):
-        self.spell = spell
-
-    def hit(self):
-        print(f"Warrior {self.name} hits with {self.weapon.hit()}")
-
-    def cast(self):
-        print(f"Warrior {self.name} casts {self.spell.cast()}")
-
-
-class Claymore:
-
-    def hit(self):
-        return "Claymore"
-
-
-class Power:
-    def cast(self):
-        return "Power"
+    class Spell:
+        def cast(self):
+            return "Power"
 
 
 class MageFactory(HeroFactory):
-    def create_hero(self, name):
-        return Mage(name)
+    class Hero:
+        def __init__(self, name):
+            self.name = name
+            self.weapon = None
+            self.armor = None
+            self.spell = None
 
-    def create_weapon(self):
-        return Staff()
+        def add_weapon(self, weapon):
+            self.weapon = weapon
 
-    def create_spell(self):
-        return Fireball()
+        def add_spell(self, spell):
+            self.spell = spell
 
+        def hit(self):
+            print(f"Mage hits with {self.weapon.hit()}")
+            self.weapon.hit()
 
-class Mage:
-    def __init__(self, name):
-        self.name = name
-        self.weapon = None
-        self.armor = None
-        self.spell = None
+        def cast(self):
+            print(f"Mage casts {self.spell.cast()}")
+            self.spell.cast()
 
-    def add_weapon(self, weapon):
-        self.weapon = weapon
+    class Weapon:
+        def hit(self):
+            return "Staff"
 
-    def add_spell(self, spell):
-        self.spell = spell
-
-    def hit(self):
-        print(f"Mage {self.name} hits with {self.weapon.hit()}")
-        self.weapon.hit()
-
-    def cast(self):
-        print(f"Mage {self.name} casts {self.spell.cast()}")
-        self.spell.cast()
-
-
-class Staff:
-    def hit(self):
-        return "Staff"
-
-
-class Fireball:
-    def cast(self):
-        return "Fireball"
+    class Spell:
+        def cast(self):
+            return "Fireball"
 
 
 class AssassinFactory(HeroFactory):
-    def create_hero(self, name):
-        return Assassin(name)
+    class Hero:
+        def __init__(self, name):
+            self.name = name
+            self.weapon = None
+            self.armor = None
+            self.spell = None
 
-    def create_weapon(self):
-        return Dagger()
+        def add_weapon(self, weapon):
+            self.weapon = weapon
 
-    def create_spell(self):
-        return Invisibility()
+        def add_spell(self, spell):
+            self.spell = spell
 
+        def hit(self):
+            print(f"Assassin hits with {self.weapon.hit()}")
+            self.weapon.hit()
 
-class Assassin:
-    def __init__(self, name):
-        self.name = name
-        self.weapon = None
-        self.armor = None
-        self.spell = None
+        def cast(self):
+            print(f"Assassin casts {self.spell.cast()}")
 
-    def add_weapon(self, weapon):
-        self.weapon = weapon
+    class Weapon:
+        def hit(self):
+            return "Dagger"
 
-    def add_spell(self, spell):
-        self.spell = spell
-
-    def hit(self):
-        print(f"Assassin {self.name} hits with {self.weapon.hit()}")
-        self.weapon.hit()
-
-    def cast(self):
-        print(f"Assassin {self.name} casts {self.spell.cast()}")
-
-
-class Dagger:
-    def hit(self):
-        return "Dagger"
-
-
-class Invisibility:
-    def cast(self):
-        return "Invisibility"
+    class Spell:
+        def cast(self):
+            return "Invisibility"
 
 
 def create_hero(factory):
     hero = factory.create_hero("Nagibator")
 
     weapon = factory.create_weapon()
-    ability = factory.create_spell()
+    spell = factory.create_spell()
 
     hero.add_weapon(weapon)
-    hero.add_spell(ability)
+    hero.add_spell(spell)
 
     return hero
 
 
-factory = AssassinFactory()
-player = create_hero(factory)
+player = create_hero(AssassinFactory)
 player.cast()
 player.hit()
 
 
-factory = MageFactory()
-player = create_hero(factory)
+player = create_hero(MageFactory)
 player.cast()
 player.hit()
-
-
-
-
-
-
 
